@@ -1,0 +1,15 @@
+@foreach($coordinatePointWorkdays as $item)
+    {   recid: '{{$item->id}}',
+    name: '{{$item->name}}',
+    monday: '{{$item->monday}}',
+    tuesday: '{{$item->tuesday}}',
+    wednesday: '{{$item->wednesday}}',
+    thursday: '{{$item->thursday}}',
+    friday: '{{$item->friday}}',
+    saturday: '{{$item->saturday}}',
+    sunday: '{{$item->sunday}}',
+    is_active: '{{trans('InterfaceTranses.is_active.'.$item->is_active)}}',
+    updated_at:'{{ $item->updated_at}}',
+    created_at:'{{ $item->created_at}}',
+    },
+@endforeach

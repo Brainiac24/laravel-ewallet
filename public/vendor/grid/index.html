@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html>
+<body>
+<script src="jquery.min.js"></script>
+<script type="text/javascript" src="w2ui.min.js"></script>
+<link rel="stylesheet" type="text/css" href="w2ui.min.css" />
+<div id="grid" style="width: 100%; height: 400px;"></div>
+
+<script type="text/javascript">
+    jQuery(function ($) {
+        $('#grid').w2grid({
+            name: 'grid',
+            multiSelect: false,
+           show: {
+                toolbar: true,
+                toolbarReload: false,
+                footer: true,
+                toolbarAdd: false,
+                toolbarDelete: false,
+                toolbarSearch:false,
+                toolbarInput:false,
+                toolbarEdit: false,
+
+            },
+            toolbar: {
+                onClick: function (event) {
+                    if (event.target == 'append') alert(w2ui.grid.getSelection());
+                    if (event.target == 'show') alert("Show"+w2ui.grid.getSelection());
+                    if (event.target == 'edit') alert("edit"+w2ui.grid.getSelection());
+                    if (event.target == 'delete') alert("delete"+w2ui.grid.getSelection());
+                },
+                items: [
+                    { type: 'button', id: 'append', text: 'Добавить', icon: 'w2ui-icon-plus' , disabled: true },
+                    { type: 'button', id: 'show', text: 'Показать', icon: 'w2ui-icon-check'  ,  disabled: true },
+                    { type: 'button', id: 'edit', text: 'Редактировать', icon: 'w2ui-icon-pencil'  ,  disabled: true },
+                    { type: 'button', id: 'delete', text: 'Удалить', icon: 'w2ui-icon-cross' ,  disabled: true },
+                    { type: 'break',  id: 'break0' },
+                    { type: 'drop',  id: 'searchfrm', text: 'Поиск ...', icon: 'w2ui-icon-search',
+                        html: '<div id="#formSrch" style="width: 400px; height: 300px">' +
+                        'test' +
+                        '</div>'
+                    },
+                    { type: 'drop',  id: 'exportfrm', text: 'Экспорт',  html: '<div id="#formSrch" style="width: 400px; height: 300px">' +
+                        'test' +
+                        '</div>'
+                    },
+                ]
+                },
+            searches: [
+                { field: 'lname', caption: 'Last Name', type: 'text' },
+                { field: 'fname', caption: 'First Name', type: 'text' },
+                { field: 'email', caption: 'Email', type: 'text' }
+            ],
+            columns: [
+                { field: 'recid', caption: 'ID', size: '50px', sortable: true, attr: 'align=center' },
+                { field: 'lname', caption: 'Last Name', size: '30%', sortable: true },
+                { field: 'fname', caption: 'First Name', size: '30%', sortable: true },
+                { field: 'email', caption: 'Email', size: '40%' },
+                { field: 'sdate', caption: 'Start Date', size: '120px' }
+            ],
+            onSelect: function(event) {
+                this.toolbar.enable('edit');
+                this.toolbar.enable('show');
+                this.toolbar.enable('delete');
+            },
+            onUnselect: function(event) {
+                this.toolbar.disable('edit');
+                this.toolbar.disable('show');
+                this.toolbar.disable('delete');
+            },
+            records: [
+                { recid: 1, fname: 'Jane', lname: 'Doe', email: 'jdoe@gmail.com', sdate: '4/3/2012' },
+                { recid: 2, fname: 'Stuart', lname: 'Motzart', email: 'jdoe@gmail.com', sdate: '4/3/2012' },
+                { recid: 3, fname: 'Jin', lname: 'Franson', email: 'jdoe@gmail.com', sdate: '4/3/2012' },
+                { recid: 4, fname: 'Susan', lname: 'Ottie', email: 'jdoe@gmail.com', sdate: '4/3/2012' },
+                { recid: 5, fname: 'Kelly', lname: 'Silver', email: 'jdoe@gmail.com', sdate: '4/3/2012' },
+                { recid: 6, fname: 'Francis', lname: 'Gatos', email: 'jdoe@gmail.com', sdate: '4/3/2012' },
+                { recid: 7, fname: 'Mark', lname: 'Welldo', email: 'jdoe@gmail.com', sdate: '4/3/2012' },
+                { recid: 8, fname: 'Thomas', lname: 'Bahh', email: 'jdoe@gmail.com', sdate: '4/3/2012' },
+                { recid: 9, fname: 'Sergei', lname: 'Rachmaninov', email: 'jdoe@gmail.com', sdate: '4/3/2012' },
+                { recid: 20, fname: 'Jill', lname: 'Doe', email: 'jdoe@gmail.com', sdate: '4/3/2012' },
+                { recid: 21, fname: 'Frank', lname: 'Motzart', email: 'jdoe@gmail.com', sdate: '4/3/2012' },
+                { recid: 22, fname: 'Peter', lname: 'Franson', email: 'jdoe@gmail.com', sdate: '4/3/2012' },
+                { recid: 23, fname: 'Andrew', lname: 'Ottie', email: 'jdoe@gmail.com', sdate: '4/3/2012' },
+                { recid: 24, fname: 'Manny', lname: 'Silver', email: 'jdoe@gmail.com', sdate: '4/3/2012' },
+                { recid: 25, fname: 'Ben', lname: 'Gatos', email: 'jdoe@gmail.com', sdate: '4/3/2012' },
+                { recid: 26, fname: 'Doer', lname: 'Welldo', email: 'jdoe@gmail.com', sdate: '4/3/2012' },
+                { recid: 27, fname: 'Shashi', lname: 'Bahh', email: 'jdoe@gmail.com', sdate: '4/3/2012' },
+                { recid: 28, fname: 'Av', lname: 'Rachmaninov', email: 'jdoe@gmail.com', sdate: '4/3/2012' }
+            ]
+        });
+
+    });
+</script>
+
+<script type="text/javascript">
+    $(function () {
+        $('#formSrch').w2form({
+            name     : 'form',
+            url      : 'server/post',
+            header   : 'Field Types',
+            formURL  : 'data/form.html',
+            fields: [
+                { field: 'field_text', type: 'text', required: true },
+                { field: 'field_alpha', type: 'alphaNumeric', required: true },
+                { field: 'field_int', type: 'int', required: true },
+                { field: 'field_float', type: 'float', required: true },
+                { field: 'field_date', type: 'date' },
+                { field: 'field_list', type: 'list', required: true,
+                    options: { items: ['Adams, John', 'Johnson, Peter', 'Lewis, Frank', 'Cruz, Steve', 'Donnun, Nick'] } },
+                { field: 'field_enum', type: 'enum', required: true,
+                    options: { items: ['Adams, John', 'Johnson, Peter', 'Lewis, Frank', 'Cruz, Steve', 'Donnun, Nick'] } },
+                { field: 'field_textarea', type: 'text'},
+                { field: 'field_select', type: 'select', required: false, options: { items: ['fist', 'second'] } },
+                { field: 'field_check', type: 'checkbox', required: false },
+                { field: 'field_radio', type: 'radio', required: false }
+            ],
+            actions: {
+                reset: function () {
+                    this.clear();
+                },
+                save: function () {
+                    var obj = this;
+                    this.save({}, function (data) {
+                        if (data.status == 'error') {
+                            console.log('ERROR: '+ data.message);
+                            return;
+                        }
+                        obj.clear();
+                    });
+                }
+            }
+        });
+    });
+</script>
+</body>
+</html>

@@ -1,0 +1,22 @@
+@foreach($merchantQrTransactions as $transaction)
+    {
+        recid: '{{$transaction->id}}',
+        merchant_name: '{{$transaction->merchant_item->merchant->name}}',
+        merchant_item_name: '{{$transaction->merchant_item->name}}',
+        merchant_city_name: '{{$transaction->merchant_item->merchant->city->name ?? ''}}',
+        merchant_address: '{{$transaction->merchant_item->merchant->address}}',
+        service_name: '{{$transaction->service->name}}',
+        session_number: '{{$transaction->session_number}}',
+        amount: '{{$transaction->amount}}',
+        cashback_form_merchant: '{{isset($transaction->cashback_form_merchant) ? $transaction->cashback_form_merchant->amount : 0}}',
+        from_currency_iso_name: '{{$transaction->currency_iso_name}}',
+        created_at: '{{$transaction->created_at}}',
+        finished_at: '{{$transaction->finished_at}}',
+        created_by_user_fullname: '{{$transaction->user->fullNameExtendedFormat}}',
+        transaction_status: '{{$transaction->transaction_status->name}}',
+        created_by_user_msisdn: '{{$transaction->user->msisdn}}',
+        attestation: '{{$transaction->user->attestation->name}}',
+        filial: '{{$transaction->merchant_item->merchant->branch->name ?? ''}}',
+        from_account_number: '{{($transaction->from_account_without_g_scopes->account_type->account_category_type_id == \App\Services\Common\Helpers\AccountCategoryTypes::EWALLET_ID)?$transaction->user->msisdn:$transaction->from_account_without_g_scopes->number}}',
+    },
+@endforeach

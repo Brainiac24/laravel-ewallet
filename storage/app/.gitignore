@@ -1,0 +1,4 @@
+*
+!public/
+!merchant_contracts/
+!.gitignore

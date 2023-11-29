@@ -1,0 +1,41 @@
+<?php
+
+use Illuminate\Support\Facades\Schema;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Database\Migrations\Migration;
+
+class CreateRegionsTable extends Migration
+{
+    /**
+     * Run the migrations.
+     *
+     * @return void
+     */
+    public function up()
+    {
+        Schema::create('regions', function (Blueprint $table) {
+            $table->uuid('id');
+            $table->string('code',150)->nullable()->unique();
+            $table->string('code_map',150)->unique();
+            $table->string('name',255);
+            $table->text('desc')->nullable();
+            $table->boolean('is_active')->nullable()->default(1);
+            $table->uuid('country_id');
+            $table->timestamps();
+
+            $table->foreign('country_id')->references('id')->on('countries');
+
+            $table->primary('id');
+        });
+    }
+
+    /**
+     * Reverse the migrations.
+     *
+     * @return void
+     */
+    public function down()
+    {
+        Schema::dropIfExists('regions');
+    }
+}

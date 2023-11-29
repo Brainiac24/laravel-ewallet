@@ -1,0 +1,72 @@
+version: "3.5"
+services:
+#  redis:
+#      image: redis:4.0.14
+#      container_name: ${APP_NAME}_redis
+#      networks:
+#        - queue
+#      ports:
+#       - "6379"
+  ewallet_php_fpm:
+        build: ../
+        container_name: ${APP_NAME}_php_fpm
+        working_dir: ${APP_PATH_CONTAINER}
+        environment:
+          - TZ=Asia/Karachi
+        networks:
+         - ewallet
+         - global_db
+         - global_queue
+        #depends_on:
+         #- redis
+#         - db
+        volumes:
+         - ${APP_PATH_HOST}:${APP_PATH_CONTAINER}
+  ewallet_nginx:
+        image: nginx:1.15
+        container_name: ${APP_NAME}_nginx
+        working_dir: ${APP_PATH_CONTAINER}
+        environment:
+          - TZ=Asia/Karachi
+        networks:
+          - ewallet
+        depends_on:
+          - ewallet_php_fpm
+        ports:
+          - "8060:80"
+        volumes:
+          - ${APP_PATH_HOST}:${APP_PATH_CONTAINER}
+          - ${APP_PATH_NGINX_CONF_HOST}:${APP_PATH_NGINX_CONF_CONTAINER}
+#  db:
+#        image: mariadb:10.2
+#        container_name: ${APP_NAME}_mariadb
+#        restart: always
+#        networks:
+#          - db_net
+#          - global_db
+#        environment:
+#            MYSQL_ROOT_PASSWORD: 123456
+#        volumes:
+#          - mariadbdata:/var/lib/mysql
+#  adminer:
+#        image: adminer
+#        container_name: ${APP_NAME}_adminer
+#        restart: always
+#        networks:
+#          - db_net
+#        ports:
+#          - 8061:8080
+
+networks:
+  ewallet:
+    driver: bridge
+  global_queue:
+    external:
+      name: share_net_app_queue
+  global_db:
+    external:
+      name: share_net_db_wallet 
+
+volumes:
+    mariadbdata:
+        driver: local

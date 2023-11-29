@@ -1,0 +1,41 @@
+<?php
+
+return [
+    'backend' => [
+        'title' => 'Счета',
+        'number' => 'Номер счета',
+        'accounts' => 'Счета',
+        'balance' => 'Баланс',
+        'blocked_balance' => 'Блокированный баланс',
+        'account_type_id' => 'Тип счета',
+        'user_id' => 'Пользователь',
+        'currency_id' => 'Валюта',
+        'account_status_id' => 'Статус',
+        'limits_json' => 'Лимиты',
+        'params_json' => 'Параметры',
+        'created_at' => 'Создан',
+        'updated_at' => 'Изменен',
+        'table' => [
+            'title' => 'Счета',
+            'accounts' => 'Счета',
+            'balance' => 'Баланс',
+            'blocked_balance' => 'Блокированный баланс',
+            'account_type_id' => 'Тип счета',
+            'number' => 'Номер счета',
+            'user_id' => 'Пользователь',
+            'currency_id' => 'Валюта',
+            'params_json' => 'Параметры',
+            'limits_json' => 'Лимиты',
+            'created_at' => 'Создан',
+            'updated_at' => 'Изменен',
+        ],
+    ],
+    'errors' => [
+        'code_not_found' => 'Счет не найден.',
+        'account_by_number_not_found' => 'Счет не найден.',
+        'unreachable_logic_case' => 'Недостижимый логический случай.',
+        'balance_not_enough' => 'Недостаточно средств на балансе. Пожалуйста пополните Ваш баланс.',
+        'blocked_balance_less_than_zero' => 'Ошибка. Блокированный баланс не может быть меньше нуля',
+        'balance_less_than_zero' => 'Ошибка. Баланс не может быть меньше нуля',
+    ],
+];

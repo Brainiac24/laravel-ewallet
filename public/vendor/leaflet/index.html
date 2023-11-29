@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+<head>
+</head>
+<body>
+<link rel="stylesheet" href="./leaflet.css" />
+<script src="./leaflet.js"></script>
+<style>
+	html, body {
+		height: 100%;
+		margin: 0;
+	}
+	#map {
+		width: 100%;
+		height: 400px;
+	}
+</style>
+	<div id='map'></div>
+	<form>
+		<input id="latitude" value="">
+		<input id="longitude" value="">
+	</form>
+<script>
+    function addMarker(e){
+        if (window.event.ctrlKey) {
+            MarkersCount = MarkersCount +1;
+            if (MarkersCount==1){
+            var newMarker = new L.marker(e.latlng,{draggable:'true'}).addTo(map);
+                newMarker.on('drag', function(event){
+                    var marker = event.target;
+                    var position = newMarker.getLatLng();
+                    var lat = document.getElementById("latitude");
+                    var lon = document.getElementById("longitude");
+					lat.value=position.lat;
+                    lon.value= position.lng;
+                });
+                var position = newMarker.getLatLng();
+                var lat = document.getElementById("latitude");
+                var lon = document.getElementById("longitude");
+                lat.value=position.lat;
+                lon.value= position.lng;
+
+            }
+        }
+	};
+
+    var map = L.map('map').setView([40.27747, 69.64125], 17);
+	L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+		attribution: ''
+	}).addTo(map);
+
+	var LeafIcon = L.Icon.extend({
+		options: {
+			shadowUrl: '',
+            iconSize:     [26,32],
+			shadowSize:   [25, 32],
+			iconAnchor:   [11, 47],
+			shadowAnchor: [2, 31],
+			popupAnchor:  [-3, -76]
+		}
+	});
+	var terminalIcon = new LeafIcon({iconUrl: '/vendor/leaflet/images/terminal.png'}), mainOfficeIcon = new LeafIcon({iconUrl: '/vendor/leaflet/images/mainoffice.png'}), bancomats = new LeafIcon({iconUrl: 'bankomat.png'});
+	L.marker([40.27747, 69.64125], {icon: mainOfficeIcon}).bindPopup("Головной оффис").addTo(map);
+    L.marker([40.2851569, 69.6220890], {icon: mainOfficeIcon}).bindPopup("Банк Эсхата").addTo(map);
+    L.marker([40.27961, 69.62660], {icon: mainOfficeIcon}).bindPopup("Банк Эсхата").addTo(map);
+	map.on('click', addMarker);
+    var MarkersCount=0;
+</script>
+</body>
+</html>

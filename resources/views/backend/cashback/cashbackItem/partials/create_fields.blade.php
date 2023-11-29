@@ -1,0 +1,56 @@
+<div class="form-group required">
+    {!! Form::label('name', trans('cashback.backend.name').':', ['class' => 'control-label col-sm-2']) !!}
+    <div class='col-sm-9'>
+        {!! Form::text('name', null, ['class' => 'form-control']) !!}
+    </div>
+</div>
+
+<div class="form-group required">
+    {!! Form::label('min', trans('cashbackItem.backend.min').':', ['class' => 'control-label col-sm-2']) !!}
+    <div class='col-sm-9'>
+        {!! Form::text('min', $maxValue, ['class' => 'form-control']) !!}
+    </div>
+</div>
+
+<div class="form-group required">
+    {!! Form::label('max', trans('cashbackItem.backend.max').':', ['class' => 'control-label col-sm-2']) !!}
+    <div class='col-sm-9'>
+        {!! Form::text('max', null, ['class' => 'form-control']) !!}
+    </div>
+</div>
+
+<div class="form-group required">
+    {!! Form::label('value', trans('cashbackItem.backend.value').':', ['class' => 'control-label col-sm-2']) !!}
+    <div class='col-sm-9'>
+        {!! Form::text('value', null, ['class' => 'form-control']) !!}
+    </div>
+</div>
+
+<div class="form-group required">
+    {!! Form::label('is_percentage', trans('cashbackItem.backend.is_percentage').':', ['class' => 'control-label col-sm-2']) !!}
+    <div class='col-sm-9'>
+        {!! Form::select('is_percentage',  trans('InterfaceTranses.yesno'),  0, ['class' => 'form-control']) !!}
+    </div>
+</div>
+
+<div class="form-group required">
+    {!! Form::label('cashback_id', trans('cashbackItem.backend.cashback_id').':', ['class' => 'control-label col-sm-2']) !!}
+    <div class='col-sm-9'>
+        {!! Form::text('cashback_id', $cashback->name ?? null, ['class' => 'form-control','readonly']) !!}
+    </div>
+</div>
+
+
+{{--<div class="form-group required">--}}
+    {{--{!! Form::label('cashback_id', trans('cashbackItem.backend.cashback_id').':', ['class' => 'control-label col-sm-2']) !!}--}}
+    {{--<div class='col-sm-9'>--}}
+        {{--{!! Form::select('cashback_id', $filterCashbacks, null, ['class' => 'form-control']) !!}--}}
+    {{--</div>--}}
+{{--</div>--}}
+
+{{--<div class="form-group required">--}}
+    {{--{!! Form::label('is_active', trans('cashbackItem.backend.is_active').':', ['class' => 'control-label col-sm-2']) !!}--}}
+    {{--<div class='col-sm-9'>--}}
+        {{--{!! Form::select('is_active',  trans('InterfaceTranses.enabled'),  1, ['class' => 'form-control']) !!}--}}
+    {{--</div>--}}
+{{--</div>--}}
